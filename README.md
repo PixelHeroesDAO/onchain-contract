@@ -1,8 +1,47 @@
-# Basic Sample Hardhat Project
+# NFT Contract for on chain metadata by SVG
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+## ドット絵生成について
 
-Try running some of the following tasks:
+### 方針
+
+ガス代やブロックチェーン上のデータ圧縮を重視する
+
+- 情報記録はbyteデータで格納し、SVGのpath形式へデコードする
+- bytesデータでサブセット的に格納することから、tiny svg(tsvg)とでもする。
+- 記述はpathのみを使い、Mで起点を設定後、hとvでの輪郭形成する。~~これはLを使うよりも生成されるSVGコード量を節約できるため。ただ拡張性の観点でlも残す。~~拡縮により隙間から背後のべた塗りが見えるため、lも使って隙間埋めを積極的に行う。
+- 再利用性のある形状はほとんどないこと、1ドットを描画するならpathで直接記述したほうが短いこと、id衝突(html内で一意であることが必要)回避のため、再利用はしない
+- pathの最後はzで閉じる
+- path移動量の制限により、ドット絵のサイズは128×128以下とする（それ以上大きいともはやドット絵でもないし・・・）
+
+### 記述方法
+
+byte：[byte数:内容]、bit：{bit数:内容}で記述方法を定義する。
+最初の4bitから命令種別を読み、可変長の引数を読み込んでデコードする。
+ただ可読性は低いので、別途エンコーダを用意して変換できるようにする。
+
+[1:命令種][0～3:引数]
+- 0:無効、終了
+  - なし 
+- 1:色指定&path開始
+  - [3:色#000000形式]
+- 2:path終了
+  - なし
+- 3:M@path
+  - [1:x始点uint8, 1:y始点uint8] 0～127までを使う
+- 4:h@path
+  - [1:水平移動量int8] -127～127までを使う
+- 5:v@path
+  - [1:垂直移動量int8] -127～127までを使う
+
+- 6:l@path
+  - [1:水平移動量int8,1:垂直移動量int8] -127～127までを使う
+- 7:L@path
+  - [1:水平座標uint8,1:垂直座標uint8] 0～127までを使う
+- 8:ドット描画@path
+  - [1:水平座標uint8,1:垂直座標uint8 0～127までを使う
+  - 内部的にはMx yh1v1h-1v-1を生成する。デコード後のSVGは大きくなるが、形状が複雑な場合パスでの記述より圧縮できるため、ガス代的には好ましいことからtSVG固有の命令として追加した。
+- 9～255:予備
+
 
 ```shell
 npx hardhat accounts
