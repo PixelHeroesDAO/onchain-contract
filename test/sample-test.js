@@ -7,17 +7,17 @@ describe("PHO", function () {
     const PHO = await PHO_Factory.deploy();
     await PHO.deployed();
 
-    var res = await PHO._getSVG(0,1);
+    var res = await PHO._getSVG(0,0,true);
     console.log(res);
-    res = await PHO._getSVG(1,1);
+    res = await PHO._getSVG(1,1,true);
     console.log(res);
-    res = await PHO._getSVG(2,16);
+    res = await PHO._getSVG(2,16,true);
     console.log(res);
-    res = await PHO._getSVG(3,0);
+    res = await PHO._getSVG(3,2,true);
     console.log(res);
-    res = await PHO._getSVG(4,0);
+    res = await PHO._getSVG(4,0,true);
     console.log(res);
-    res = await PHO._getSVG(5,0);
+    res = await PHO._getSVG(5,0,true);
     console.log(res);
 
   });

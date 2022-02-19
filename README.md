@@ -38,17 +38,20 @@ byte：[byte数:内容]、bit：{bit数:内容}で記述方法を定義する。
 - 7:L@path
   - [1:水平座標uint8,1:垂直座標uint8] 0～127までを使う
 - 8:ドット描画@path
-  - [1:水平座標uint8,1:垂直座標uint8 0～127までを使う
+  - [1:水平座標uint8,1:垂直座標uint8] 0～127までを使う
   - 内部的にはMx yh1v1h-1v-1を生成する。デコード後のSVGは大きくなるが、形状が複雑な場合パスでの記述より圧縮できるため、ガス代的には好ましいことからtSVG固有の命令として追加した。
-- 9～255:予備
+- 9:2ドット描画@path
+  - [1:水平座標uint8,1:垂直座標uint8] 0～126までを使う
+  - 内部的にはMx yh2v2h-2v-2を生成する。色境界抜け問題で2ドットで1ドット描画し、色境界を下地塗りするために使う。
+- 10:水平V字@path
+  - [1:水平移動量int8(dx),1:垂直移動量int8(dy)] -127～127までを使う
+  - 境界塗り対応でl要素の利用が増えて増大するため、V字形の専用path要素を追加する。
+  - 内部的にはl(dx) (dy)l(dx) (-dy)を生成する。
+- 11:垂直V字@path
+  - [1:水平移動量int8(dx),1:垂直移動量int8(dy)] -127～127までを使う
+  - 境界塗り対応でl要素の利用が増えて増大するため、V字形の専用path要素を追加する。
+  - 内部的にはl(dx) (dy)l(-dx) (dy)を生成する。
+
+- 12～255:予備
 
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```

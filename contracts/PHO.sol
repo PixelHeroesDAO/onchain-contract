@@ -10,9 +10,6 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "hardhat/console.sol";
 
 contract PHO is Ownable {
-    //Library
-    using SafeMath for uint256;
-
     //tSVG Database
     bytes[] private tSVG_data;
     uint256[] private attr2index;   //属性要素からtSVG_dataのindexへの変換表
@@ -73,8 +70,8 @@ contract PHO is Ownable {
         //0
         _addtSVG(attr_id, hex"01000000030D0406FD03050204080201787878030B060404050304FC020199999903060B0501040305FF04050501040405FC04F7020162201008070A080809080E09081109030F080402050304FE05FD080E07030E0A04FB0501040505FC04FE050104FF05FE0403020178220E080C05080D05080E06080F070810080311090402050604FF050104FF05FF04FF05FB0401020100000008080B080E0B03070D040105010401050204FF05FF04FF05FB04FF050304010807090308080501040705FF080F0903100A0401050504FE050104FF05FE040105FF040105FD08110F0312090401050604FF05FA080A07080A06080B05080C04080D04080E05080F060810070811080201F6A2CF08080E080E0E0200");
         _addtSVG(attr_id, hex"0122204803050B0601040601010608010602FE0601FC06FBFB06FC0102012B2B2B03070D0601FF040706010106FF0204F9020124232303070D04040501040105FF040406FDFD06FC010201BCBCBC08090C08090D080D0C080D0D02011B1B1B080B0B03070F05FD040205FE040505020402050304FF05FC04F905040201000000030907050104FE050204FE050504020502040905FF04F605F9040205FE03090604050502040205020402050504FE0501040105F904FE05FE04FA0200");
-        _addtSVG(attr_id, hex"");
-        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"01616ED4030C0604FF06FC040604010605FF03060E0602020601FD03110E06FE0206FFFD0201313973030A08050104FF05010602020602FF0601FF05FF04FF05FF03080F04020502030F0F04FE05020201505BB2030A06050204FF050104FF050206FEFF030D06050204010501040105020602FF03060E040306FEFE03110E04FD0602FE02011D2244080B0A03090F05FE04FE06FFFD04040502040305FE040406FF0304FE050206010105FB04F905050201656262030C07050406FFFF05FE0201000000080B0503060A040105FE040205FE0405050204020502040105FF04FE05FE04FE04FB050204FE03060A04FF05030401050204030502040505FE040305FE040105FD04FF06FF03050304F705FD02017C7B7B03060C05FE0401050103110C05FE04FF0501080B06080B0702012E2D2D03060B0502040105FF03110B050204FF05FF02014F4F4F080B0A08060B08100B02");
+        _addtSVG(attr_id, hex"0162201003060A06030104050603FF06FEFE05FF0601FE06FC0206FFFF05FF02014E7F7803070D0601020602020604FF0601FF0601FE0601FD04FE050304FF050204FF05FF04FD050104FF05FE04FF05FE040105FF04010501040305FF04010501040105FE04F9050104FE080B0B080B0C080B0D0201147F6C030A1105FE040105FF04010501040105010201147F6C080B0A0201000000030A06050104FE050204FE050404020503040705FD040205FC04FE05FE04FC05FF040305020402050704FE050204FB05FE04FE05F9040205FE080A05080E05080F05080F060200");
         _addtSVG(attr_id, hex"");
         //5
         _addtSVG(attr_id, hex"");
@@ -95,15 +92,43 @@ contract PHO is Ownable {
         _addtSVG(attr_id, hex"");
         //leftarm
         attr_id = addAttribute();
+        //0
         _addtSVG(attr_id, hex"01000000030206040305010403050F04FD05FD04FF05FE040105FD04FD0201F4F4F40303070402050604FE0201E4E4E40304080402050404FE020185828208040708040C08050808050B08060808060B0201C1BEBE0305090402050204FE0201C481470306080401050804FF0806140201CC89760805110806110805120806120200");
+        _addtSVG(attr_id, hex"010000000306120404050204FC05FE0307110402050404FE0201CC89760807120807130808120808130200");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        //5
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        //10
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
         //rightarm
         attr_id = addAttribute();
+        //0
         _addtSVG(attr_id, hex"01000000030E120404050204FC05FE030F110402050404FE0201CC8976080F12080F130810120810130200");
-
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        //5
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
+        //10
+        _addtSVG(attr_id, hex"");
+        _addtSVG(attr_id, hex"");
     }
 
     //SVG文字列の取得
-    function _getSVG(uint256 attr_id, uint256 elem_id) public view returns(string memory res){
+    function _getSVG(uint256 attr_id, uint256 elem_id, bool GBC) public view returns(string memory res){
         require(attr_id < attr2index.length, "Range out:Attribute ID");
         uint256 elem_count = _getElementCount(attr_id);
         require(elem_id < elem_count, "Renge out:Element ID");
@@ -120,21 +145,25 @@ contract PHO is Ownable {
         int8 dx;
         int8 dy;
         string memory strparam;
-        string memory svg;
+        string memory svg='';
         for(i=0;i<tSVG_data[tSVG_id].length;i++){
             comm = uint8(tSVG_data[tSVG_id][i]);
             if (comm==0){
                 eoc=true;
             }else if (comm==1){
-                strparam = string(abi.encodePacked(Hex2Str(tSVG_data[tSVG_id][i+1]),
-                                                   Hex2Str(tSVG_data[tSVG_id][i+2]),
-                                                   Hex2Str(tSVG_data[tSVG_id][i+3])));
+                if (GBC){
+                    strparam = _GBCfilter(tSVG_data[tSVG_id][i+1],tSVG_data[tSVG_id][i+2],tSVG_data[tSVG_id][i+3]);
+                } else {
+                    strparam = string(abi.encodePacked(Hex2Str(tSVG_data[tSVG_id][i+1]),
+                                                    Hex2Str(tSVG_data[tSVG_id][i+2]),
+                                                    Hex2Str(tSVG_data[tSVG_id][i+3])));
+                }
                 svg = string(abi.encodePacked(svg,'<path fill="#', strparam ,'" d="'));
                 i = i+3;
             }else if(comm==2){
                 svg = string(abi.encodePacked(svg,'z"/>'));
             }else if(comm==3){
-                //0～127まで使う。if分は使わず8bit目を捨てる。
+                //0～127まで使う。if文は使わず8bit目を捨てる。
                 x = uint8(tSVG_data[tSVG_id][i+1]) & uint8(127);
                 y = uint8(tSVG_data[tSVG_id][i+2]) & uint8(127);
                 strparam = string(abi.encodePacked(uint2str(x),
@@ -171,7 +200,7 @@ contract PHO is Ownable {
                 svg = string(abi.encodePacked(svg,'L', strparam ));
                 i = i+2;
             }else if(comm==8){
-                //0～127まで使う。if分は使わず8bit目を捨てる。
+                //0～127まで使う。if文は使わず8bit目を捨てる。
                 x = uint8(tSVG_data[tSVG_id][i+1]) & uint8(127);
                 y = uint8(tSVG_data[tSVG_id][i+2]) & uint8(127);
                 strparam = string(abi.encodePacked(uint2str(x),
@@ -179,9 +208,52 @@ contract PHO is Ownable {
                                                    uint2str(y)));
                 svg = string(abi.encodePacked(svg,'M', strparam , 'h1v1h-1v-1'));
                 i = i+2;
+            }else if(comm==9){
+                //テスト未実施
+                //0～126まで使う。if文は使わず8bit目を捨てる。処理上は127も許容する
+                x = uint8(tSVG_data[tSVG_id][i+1]) & uint8(127);
+                y = uint8(tSVG_data[tSVG_id][i+2]) & uint8(127);
+                strparam = string(abi.encodePacked(uint2str(x),
+                                                   " ",
+                                                   uint2str(y)));
+                svg = string(abi.encodePacked(svg,'M', strparam , 'h2v2h-2v-2'));
+                i = i+2;
+            }else if(comm==10){
+                //テスト未実施
+                //-127～127まで使う。
+                dx = byte2int8(tSVG_data[tSVG_id][i+1]);
+                dy = byte2int8(tSVG_data[tSVG_id][i+2]);
+                if (dy==-128) { dx=-127;} //int8は-128に-1を乗じられないため-127に丸める
+                strparam = string(abi.encodePacked(int2str(dx),
+                                                   " ",
+                                                   int2str(dy)));
+                svg = string(abi.encodePacked(svg,'l', strparam ));
+                strparam = string(abi.encodePacked(int2str(dx),
+                                                   " ",
+                                                   int2str(-dy)));
+                svg = string(abi.encodePacked(svg,'l', strparam ));
+                i = i+2;
+                eoc = true;
+            }else if(comm==11){
+                //テスト未実施
+                //-127～127まで使う。
+                dx = byte2int8(tSVG_data[tSVG_id][i+1]);
+                dy = byte2int8(tSVG_data[tSVG_id][i+2]);
+                if (dx==-128) { dx=-127;} //int8は-128に-1を乗じられないため-127に丸める
+                strparam = string(abi.encodePacked(int2str(dx),
+                                                   " ",
+                                                   int2str(dy)));
+                svg = string(abi.encodePacked(svg,'l', strparam ));
+                strparam = string(abi.encodePacked(int2str(-dx),
+                                                   " ",
+                                                   int2str(dy)));
+                svg = string(abi.encodePacked(svg,'l', strparam ));
+                i = i+2; 
+                eoc = true;
             }else{
                 eoc = true;
             }
+
             if (i>=tSVG_data[tSVG_id].length){
                 break;
             }
@@ -315,5 +387,25 @@ contract PHO is Ownable {
     function _setElementCount(uint256 attr_id, uint256 elem_count) public{
         //対象：8bit　0で初期化=>要素数とOR論理和を取って書き込み
         attr2index[attr_id] = (attr2index[attr_id] & ~uint256(255)) | (elem_count);
+    }
+
+    function _GBCfilter(bytes1 bR, bytes1 bG, bytes1 bB) public view returns(string memory res){
+        uint256 uR = uint256(uint8(bR));
+        uint256 uG = uint256(uint8(bG));
+        uint256 uB = uint256(uint8(bB));
+//Color1
+//        uint256 fR = (291 * uR + 571 * uG + 140 * uB) / 1000;
+//        uint256 fG = (276 * uR + 542 * uG + 133 * uB + 150 * 255) / 1000;
+//        uint256 fB = (204 * uR + 400 * uG +  98 * uB) / 1000;
+//Color2
+        uint256 fR = (218 * uR + 428 * uG + 105 * uB + 125 * 255) / 1000;
+        uint256 fG = (198 * uR + 388 * uG +  95 * uB + 270 * 255) / 1000;
+        uint256 fB = (119 * uR + 234 * uG +  57 * uB + 200 * 255) / 1000;
+        if (fR > 255) fR = 255;
+        if (fG > 255) fG = 255;
+        if (fB > 255) fB = 255;
+        res = string(abi.encodePacked(Hex2Str(bytes1(uint8(fR))),
+                                      Hex2Str(bytes1(uint8(fG))),
+                                      Hex2Str(bytes1(uint8(fB)))));
     }
 }
